@@ -1,0 +1,35 @@
+name: 'Sms77.io SMS'
+author: 'Sms77 e.K.'
+description: 'Send SMS through GitHub Actions via the Sms77.io SMS Gateway'
+inputs:
+  apiKey:
+    description: 'A Sms77.io API Key. Alternatively stored in environment variable SMS77_API_KEY'
+    required: true
+  delay:
+    description: 'Delayed dispatch at given time: Unix-Timestamp or format yyyy-mm-dd hh:ii'
+  foreign_id:
+    description: 'Foreign ID returned in callbacks. Allowed characters: a-z, A-Z, 0-9, .-_@'
+  from:
+    description: 'Sender ID; max 16 numeric or 11 alphanumeric characters'
+  label:
+    description: 'Custom label. Allowed characters: a-z, A-Z, 0-9, .-_@'
+  text:
+    description: 'The actual message content you want to send to the recipient(s)'
+    required: true
+  to:
+    description: 'Phone number(s) or contact(s) separated by comma to send the SMS to'
+    required: true
+  ttl:
+    description: 'Time To Live in in minutes. Default is 2880'
+  udh:
+    description: 'User Data Header: If set and text contains Hexcode the sms gets sent as 8-bit binary'
+
+outputs:
+  response:
+    description: 'The API response'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  color: 'green'
+  icon: 'message-square'

@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@actions/core");
 const sms77_client_1 = __importDefault(require("sms77-client"));
 const node_fetch_1 = __importDefault(require("node-fetch"));
+const assert_1 = require("assert");
 global.fetch = node_fetch_1.default;
 const smsParams = {
     delay: undefined,
@@ -29,10 +30,11 @@ const smsParams = {
 const send = () => __awaiter(void 0, void 0, void 0, function* () {
     Object.keys(smsParams)
         .forEach(k => smsParams[k] = core_1.getInput(k));
-    const apiKey = core_1.getInput('apiKey') || process.env.SMS77_API_KEY;
     core_1.debug('Sending SMS');
     try {
-        const response = yield (new sms77_client_1.default(apiKey))
+        const apiKey = core_1.getInput('apiKey') || process.env.SMS77_API_KEY;
+        assert_1.ok(apiKey);
+        const response = yield (new sms77_client_1.default(apiKey, 'github-action-sms'))
             .sms(smsParams);
         core_1.debug('API reached, SMS dispatch ended.');
         core_1.setOutput('API response', response);

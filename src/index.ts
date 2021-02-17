@@ -1,6 +1,7 @@
 import {debug, error, getInput, setFailed, setOutput} from '@actions/core';
 import Sms77Client, {SmsParams} from 'sms77-client';
 import fetch from 'node-fetch';
+import {ok} from 'assert';
 
 (global as any).fetch = fetch;
 
@@ -22,12 +23,12 @@ const send = async () => {
     (<(keyof Type)[]>Object.keys(smsParams))
         .forEach(k => (<Type[typeof k]>smsParams[k]) = getInput(k));
 
-    const apiKey = getInput('apiKey') || process.env.SMS77_API_KEY;
-
     debug('Sending SMS');
 
     try {
-        const response = await (new Sms77Client(apiKey!))
+        const apiKey = getInput('apiKey') || process.env.SMS77_API_KEY;
+        ok(apiKey);
+        const response = await (new Sms77Client(apiKey, 'github-action-sms'))
             .sms(smsParams) as string;
         debug('API reached, SMS dispatch ended.');
         setOutput('API response', response);

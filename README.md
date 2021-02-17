@@ -19,7 +19,7 @@ Send an SMS from GitHub Actions.
 
 ```yaml
 - name: 'Send SMS'
-  uses: sms77io/github-actions-sms@master
+  uses: sms77io/github-action-sms@master
   with:
     from: 'Tommy Tester'
     text: 'Sms77.io wishes you a nice day!'

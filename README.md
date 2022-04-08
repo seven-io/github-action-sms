@@ -1,14 +1,14 @@
-![Sms77.io Logo](https://www.sms77.io/wp-content/uploads/2019/07/sms77-Logo-400x79.png "Sms77.io Logo")
+![](https://www.sms77.io/wp-content/uploads/2019/07/sms77-Logo-400x79.png "sms77 Logo")
 
-# Official Sms77.io SMS GitHub Action
+# Official [sms77](https://www.sms77.io) SMS GitHub Action
 
-Send an SMS from GitHub Actions.
+Send SMS via GitHub Actions.
 
 ## Prerequisites
 
-- An account at Sms77.io. [Sign up for free](https://app.sms77.io/anmelden)!
+- An account at sms77. [Sign up for free](https://app.sms77.io/anmelden)!
 - Account balance and an API
-  key [which you can get here](hhttps://app.sms77.io/settings#httpapi).
+  key [which you can get here](https://app.sms77.io/developer).
 
 ## Usage
 
@@ -22,8 +22,8 @@ Send an SMS from GitHub Actions.
   uses: sms77io/github-action-sms@master
   with:
     from: 'Tommy Tester'
-    text: 'Sms77.io wishes you a nice day!'
-    to: '+4901234567890,Tina Testing'
+    text: 'sms77 wishes you a nice day!'
+    to: '+4901234567890,Tina Testing' # specify multiple recipients separated by comma
   env:
     SMS77_API_KEY: ${{ secrets.SMS77_API_KEY }}
 ```
@@ -32,7 +32,7 @@ Send an SMS from GitHub Actions.
 
 `apiKey` **Required**
 
-An API Key from Sms77.io. Alternatively use environment variable SMS77_API_KEY.
+An API Key from sms77. Alternatively use environment variable SMS77_API_KEY.
 
 `to` **Required**
 
@@ -54,25 +54,29 @@ Foreign ID returned in callbacks. Allowed characters: a-z, A-Z, 0-9, .-_@
 
 Sender ID; max 16 numeric or 11 alphanumeric characters
 
+`json`
+
+If enabled, the API returns a detailed JSON response
+
 `label`
 
 Custom label. Allowed characters: a-z, A-Z, 0-9, .-_@
 
 `ttl`
 
-Time To Live in in minutes. Default is 2880
+Time To Live in minutes. Default is 2880
 
 `udh`
 
-User Data Header: If set and text contains Hexcode the sms gets sent as 8-bit binary
+User Data Header: If set and text contains Hexcode the SMS gets sent as 8-bit binary
 
 ## Outputs
 
 `response`
 
-Returns a [return code](https://www.sms77.io/en/docs/gateway/http-api/sms-disptach#return)
+Returns a [return code](https://www.sms77.io/en/docs/gateway/http-api/sms-dispatch/#return)
 from the API.
 
 ## License
 
-[![MIT](https://img.shields.io/badge/License-MIT-teal.svg)](./LICENSE)
+[![MIT](https://img.shields.io/badge/License-MIT-teal.svg)](LICENSE)

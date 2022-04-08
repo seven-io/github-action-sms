@@ -1,18 +1,25 @@
-name: 'Sms77.io SMS'
-author: 'Sms77 e.K.'
-description: 'Send SMS through GitHub Actions via the Sms77.io SMS Gateway'
+name: 'sms77 SMS'
+author: 'sms77 e.K.'
+description: 'Send SMS through GitHub Actions via the sms77 SMS Gateway'
 inputs:
   apiKey:
-    description: 'A Sms77.io API Key. Alternatively stored in environment variable SMS77_API_KEY'
-    required: true
+    description: 'A sms77 API Key. Alternatively stored in environment variable SMS77_API_KEY'
+    required: false
   delay:
     description: 'Delayed dispatch at given time: Unix-Timestamp or format yyyy-mm-dd hh:ii'
+    required: false
   foreign_id:
     description: 'Foreign ID returned in callbacks. Allowed characters: a-z, A-Z, 0-9, .-_@'
+    required: false
   from:
     description: 'Sender ID; max 16 numeric or 11 alphanumeric characters'
+    required: false
+  json:
+    description: 'If enabled, the API returns a detailed JSON response'
+    required: false
   label:
     description: 'Custom label. Allowed characters: a-z, A-Z, 0-9, .-_@'
+    required: false
   text:
     description: 'The actual message content you want to send to the recipient(s)'
     required: true
@@ -21,8 +28,10 @@ inputs:
     required: true
   ttl:
     description: 'Time To Live in in minutes. Default is 2880'
+    required: false
   udh:
     description: 'User Data Header: If set and text contains Hexcode the sms gets sent as 8-bit binary'
+    required: false
 
 outputs:
   response:

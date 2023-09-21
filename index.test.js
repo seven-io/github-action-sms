@@ -1,14 +1,14 @@
 const core = require('@actions/core');
-const Sms77Client = require('sms77-client');
+const SevenClient = require('@seven.io/api');
 const send = require('./dist/index.js').default;
 
 jest.mock('@actions/core');
-jest.mock('sms77-client');
+jest.mock('@seven.io/api');
 
 test('Log errors', async () => {
     const unauthorizedMessage = '900';
 
-    Sms77Client.mockImplementation(() => {
+    SevenClient.mockImplementation(() => {
         throw new Error(unauthorizedMessage);
     });
 
@@ -21,7 +21,7 @@ test('Log errors', async () => {
 test('Returns API response', async () => {
     const successCode = '100';
 
-    Sms77Client.mockReturnValue({
+    SevenClient.mockReturnValue({
         sms: () => successCode,
     });
 

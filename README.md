@@ -22,7 +22,7 @@ Send an SMS from GitHub Actions.
   with:
     from: 'Tommy Tester'
     text: 'seven.io wishes you a nice day!'
-    to: '+4901234567890,Tina Testing'
+    to: '+94768729736,Tina Testing'
   env:
     SEVEN_API_KEY: ${{ secrets.SEVEN_API_KEY }}
 ```

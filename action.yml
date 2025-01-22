@@ -4,7 +4,7 @@ description: 'Send SMS through GitHub Actions via the seven.io SMS Gateway'
 inputs:
   apiKey:
     description: 'A seven.io API Key. Alternatively stored in environment variable SEVEN_API_KEY'
-    required: true
+    required: false
   delay:
     description: 'Delayed dispatch at given time: Unix-Timestamp or format yyyy-mm-dd hh:ii'
   foreign_id:
@@ -28,7 +28,7 @@ outputs:
   response:
     description: 'The API response'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
 branding:
   color: 'green'

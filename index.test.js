@@ -1,29 +1,50 @@
-const core = require('@actions/core');
-const SevenClient = require('@seven.io/api');
-const send = require('./dist/index.js').default;
+const core = require('@actions/core')
+const {Client, SmsResource} = require('@seven.io/client')
+const send = require('./dist/index.js').default
 
-jest.mock('@actions/core');
-jest.mock('@seven.io/api');
+jest.mock('@actions/core')
+jest.mock('@seven.io/client')
 
 test('Log errors', async () => {
-    const unauthorizedMessage = '900';
+    const unauthorizedMessage = '900'
 
-    SevenClient.mockImplementation(() => {
-        throw new Error(unauthorizedMessage);
-    });
+    Client.mockImplementation(() => {
+        throw new Error(unauthorizedMessage)
+    })
 
-    await send();
+    await send({to: ''})
 
-    expect(core.error.mock.calls.toString()).toStrictEqual(unauthorizedMessage);
-    expect(core.setFailed.mock.calls.toString()).toStrictEqual(unauthorizedMessage);
-});
+    expect(core.error.mock.calls.toString()).toStrictEqual(unauthorizedMessage)
+    expect(core.setFailed.mock.calls.toString()).toStrictEqual(unauthorizedMessage)
+})
 
 test('Returns API response', async () => {
-    const successCode = '100';
+    const successCode = {
+        balance: 126.018,
+        debug: 'false',
+        messages: [{
+            encoding: 'gsm',
+            error: null,
+            error_text: null,
+            id: '77258685919',
+            is_binary: false,
+            label: null,
+            parts: 1,
+            price: 0.075,
+            recipient: '491716992343',
+            sender: 'SMS',
+            success: true,
+            text: 'text',
+            udh: null,
+        }],
+        sms_type: 'direct',
+        success: '100',
+        total_price: 0.15
+    }
 
-    SevenClient.mockReturnValue({
-        sms: () => successCode,
-    });
+    SmsResource.mockReturnValue({
+        dispatch: () => successCode,
+    })
 
-    expect(await send()).toEqual(successCode);
-});
+    expect(await send({to: ''})).toEqual(successCode)
+})

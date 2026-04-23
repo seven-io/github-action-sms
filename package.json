@@ -10,10 +10,10 @@
         "@seven.io/api": "npm:sms77-client@^2.26.0"
     },
     "devDependencies": {
-        "@types/jest": "^29.5.5",
+        "@types/jest": "^30.0.0",
         "@types/node": "^16.18.53",
         "@types/node-fetch": "^2.6.5",
-        "jest": "^29.7.0",
+        "jest": "^30.3.0",
         "typescript": "^5.2.2"
     },
     "description": "Send SMS through GitHub Actions via the seven.io Gateway",
